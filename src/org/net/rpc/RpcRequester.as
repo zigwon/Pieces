@@ -3,6 +3,7 @@ package org.net.rpc
 	import flash.events.EventDispatcher;
 	import flash.utils.ByteArray;
 	import flash.utils.Timer;
+	import org.net.data.DataPackager;
 	
 	public class RpcRequester extends EventDispatcher
 	{
@@ -27,11 +28,13 @@ package org.net.rpc
 		private var timeOuter:Timer
 		
 		private var batchData:ByteArray;
+		private var batcher:DataPackager;
 		
 		
 		public function RpcRequester()
 		{
 			this.requests=[];
+			this.batcher=new DataPackager(this.batchData);	
 		}
 	
 		
