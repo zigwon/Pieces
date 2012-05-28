@@ -22,5 +22,12 @@ package org.net
 			//headData.writeByte(0xC);
 			headData.writeUTF(value);
 		}
+		
+		
+		override public function readyRequest(completeHandle:Function=null,errorHandle:Function=null):void
+		{
+			super.readyRequest(completeHandle,errorHandle);
+			this.requester.headData=headData;
+		}
 	}
 }
