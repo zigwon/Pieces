@@ -10,7 +10,8 @@ package org.net.rpc
 			
 		public function RpcEvent(type:String,data:*=null, bubbles:Boolean=false, cancelable:Boolean=false)
 		{
-			super(type, data, bubbles, cancelable);
+			
+			super(type, bubbles, cancelable);
 		}
 	}
 }

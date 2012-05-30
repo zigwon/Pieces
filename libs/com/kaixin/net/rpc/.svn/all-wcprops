@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/flash/!svn/ver/19137/game/Home/%E4%BA%BA%E4%BA%BA%E4%B8%96%E7%95%8C/IOS%E7%89%88%E6%9C%AC2/libs/com/kaixin/net/rpc
+END
+KRPCClient.as
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/flash/!svn/ver/17212/game/Home/%E4%BA%BA%E4%BA%BA%E4%B8%96%E7%95%8C/IOS%E7%89%88%E6%9C%AC2/libs/com/kaixin/net/rpc/KRPCClient.as
+END
+KRPCRequestObject.as
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/flash/!svn/ver/16947/game/Home/%E4%BA%BA%E4%BA%BA%E4%B8%96%E7%95%8C/IOS%E7%89%88%E6%9C%AC2/libs/com/kaixin/net/rpc/KRPCRequestObject.as
+END
+KRPCRequester.as
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/flash/!svn/ver/19137/game/Home/%E4%BA%BA%E4%BA%BA%E4%B8%96%E7%95%8C/IOS%E7%89%88%E6%9C%AC2/libs/com/kaixin/net/rpc/KRPCRequester.as
+END
+KRPCHandleObject.as
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/flash/!svn/ver/16947/game/Home/%E4%BA%BA%E4%BA%BA%E4%B8%96%E7%95%8C/IOS%E7%89%88%E6%9C%AC2/libs/com/kaixin/net/rpc/KRPCHandleObject.as
+END
+KRPCHandlePool.as
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/flash/!svn/ver/16947/game/Home/%E4%BA%BA%E4%BA%BA%E4%B8%96%E7%95%8C/IOS%E7%89%88%E6%9C%AC2/libs/com/kaixin/net/rpc/KRPCHandlePool.as
+END
+KRPCError.as
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/flash/!svn/ver/16947/game/Home/%E4%BA%BA%E4%BA%BA%E4%B8%96%E7%95%8C/IOS%E7%89%88%E6%9C%AC2/libs/com/kaixin/net/rpc/KRPCError.as
+END

@@ -1,0 +1,61 @@
+10
+
+dir
+19982
+http://svn.d.xiaonei.com/flash/game/Home/%E4%BA%BA%E4%BA%BA%E4%B8%96%E7%95%8C/IOS%E7%89%88%E6%9C%AC2/libs/com/adobe
+http://svn.d.xiaonei.com/flash
+
+
+
+2012-03-22T12:53:00.326886Z
+19179
+qiong.wu@XIAONEI.OPI.COM
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+bd87dd47-aef4-44b1-8dd0-644956b86d16
+
+crypto
+dir
+
+utils
+dir
+
+protocols
+dir
+
+images
+dir
+
+nativeExtensions
+dir
+
+net
+dir
+
+webapis
+dir
+
+air
+dir
+
+fileformats
+dir
+
+errors
+dir
+
+serialization
+dir
+

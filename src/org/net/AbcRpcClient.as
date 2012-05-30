@@ -17,10 +17,12 @@ package org.net
 		
 		public function set code(value:String):void{
 			headData=new ByteArray();
-			//headData.writeInt(0xA1B2);
-			//headData.writeByte(0x10);
-			//headData.writeByte(0xC);
+			headData.writeInt(0xA1B2);
+			headData.writeByte(0x10);
+			headData.writeByte(0xC);
+			//b.writeUTF(this.sessionId);
 			headData.writeUTF(value);
+			//b.writeUTF(this.userId);
 		}
 		
 		

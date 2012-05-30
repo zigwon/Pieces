@@ -23,6 +23,7 @@ package org.manager
 		 */		
 		public var userId:String
 			
+		
 			
 		/**
 		 *单例 

@@ -1,14 +1,15 @@
 package org.net.rpc
-{
+{	
+	import com.adobe.serialization.json.OldJSON;
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
+	import flash.events.TimerEvent;
 	import flash.net.*;
 	import flash.utils.ByteArray;
 	import flash.utils.Timer;
-	import flash.events.TimerEvent;
 	
-	import org.net.data.DataPackager;
 	import org.net.data.DataFormat;
+	import org.net.data.DataPackager;
 	
 	public class RpcRequester extends EventDispatcher
 	{
@@ -109,8 +110,8 @@ package org.net.rpc
 			
 			requester.data=this.batchData;
 			this.responser.addEventListener(Event.COMPLETE,handleResponse);
-			this.responser.addEventListener(IOErrorEvent.IO_ERROR,errorResponse);
-			this.responser.addEventListener(HTTPStatusEvent.HTTP_STATUS,httpStatusHandle);
+			//this.responser.addEventListener(IOErrorEvent.IO_ERROR,errorResponse);
+			//this.responser.addEventListener(HTTPStatusEvent.HTTP_STATUS,httpStatusHandle);
 			this.responser.load(requester);		
 			timeOuter.reset();
 			timeOuter.start();
@@ -134,6 +135,7 @@ package org.net.rpc
 			}catch(e:Error){
 				//TODO error eventdispatch
 				//AbcDispatcher.dispatchEvent(ComController_org.instance.Err_Server_COM,new Err_Server_VO(509, MessageType.systemError));
+				trace("509");
 				return;
 			}
 			
@@ -153,7 +155,7 @@ package org.net.rpc
 			{
 				var ro:RpcRequestObject=this.requests[i];
 				var f:Function;
-				if(results[i] is KRPCError)
+				if(results[i] is RpcError)
 				{
 					for each(f in ro.errorHandles)
 					{
@@ -177,6 +179,7 @@ package org.net.rpc
 					}
 				}
 			}
+			/**
 			//进一步判断和执行服务端附带传送回来的请求
 			for(i=this.requests.length;i<results.length;i++)
 			{
@@ -184,8 +187,8 @@ package org.net.rpc
 				var vars:*=results[i][1];
 				var pool:KRPCHandlePool=KRPCHandlePool.connect();
 				pool.call(func,vars);
-				//trace(this.requests[i].funcName+":"+JSON.encode(results[i]))
 			}
+			*/
 			
 			
 			if(completeHandle!=null)completeHandle.apply();

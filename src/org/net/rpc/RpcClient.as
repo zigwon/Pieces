@@ -64,9 +64,9 @@ package org.net.rpc
 			if(this._requestURI=="")throw new Error(RpcError.URI_IS_NULL);
 			if(this._requestURI.indexOf("?")!=-1)
 			{
-				this.requester.go(this._requestURI+"&t="+new Date().getTime());
+				this.requester.go(this._requestURI+"&t="+new Date().time);
 			}else{
-				this.requester.go(this._requestURI+"?t="+new Date().getTime());
+				this.requester.go(this._requestURI+"?t="+new Date().time);
 			}
 			this.requester=null;
 		}

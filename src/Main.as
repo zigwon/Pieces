@@ -9,6 +9,7 @@ package
 	import org.manager.LoaderManager;
 	import org.net.AbcLoaderText;
 	import org.manager.GlobalManager;
+	import org.manager.ServerManager;
 	
 	[SWF(width=1024, height=768, frameRate=30,backgroundColor="#321519")]
 	public class Main extends MovieClip
@@ -38,7 +39,10 @@ package
 			GlobalModel.userId = e.data;
 			trace("userId:" + GlobalModel.userId);
 			//全局变量
-			GlobalManager.instance.initialize(stage)
+			GlobalManager.instance.initialize(stage);
+				
+			ServerManager.instance.callServer(["getUserPets", [224049118], ["test"]]);
 		}
+		
 	}
 }
