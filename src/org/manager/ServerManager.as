@@ -4,6 +4,7 @@ package org.manager
 	import org.utils.Constants;
 	import org.net.rpc.RpcError;
 	import org.net.rpc.RpcEvent;
+	import org.data.model.global.GlobalModel
 	
 	public class ServerManager
 	{
@@ -31,7 +32,6 @@ package org.manager
 			 */		
 			public function callServer(paras:Array):void{
 				trace("读取接口："+paras[0])
-				setServer();
 				readyRequest();
 				newRequest.apply(null,paras);
 				doRequest()
@@ -40,6 +40,7 @@ package org.manager
 			
 			public function readyRequest(completeHandle:Function=null,errorHandle:Function=null):void
 			{
+				setServer();
 				rpc.readyRequest(completeHandle, errorHandle);
 			}
 			
@@ -69,18 +70,18 @@ package org.manager
 			public function setServer(server:String=null, appId:String = null, userid:String = null, uniquekey:String=null):void{
 				
 				//userId
-				GlobalManager.instance.userId = userid||GlobalManager.instance.userId;
+				GlobalModel.userId = userid||GlobalModel.userId;
 				
 				server = Constants.URL_SERVER;
 				appId = Constants.APP_ID;
 				
 				if(uniquekey==null||uniquekey==""){
-					uniquekey = GlobalManager.instance.userId+"#"+appId+"#l63ocwAM0H"
+					uniquekey = GlobalModel.userId+"#"+appId+"#l63ocwAM0H"
 				}
 				
-				var RequestURI:String = server+"?appId="+appId;
+				var requestURI:String = server+"?appId="+appId;
 				
-				registerRpcClient(uniquekey, server+"?appId="+appId);
+				registerRpcClient(uniquekey, requestURI);
 			}
 			
 			

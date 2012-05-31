@@ -1,8 +1,12 @@
 package org.net.rpc
 {	
 	import com.adobe.serialization.json.OldJSON;
+	
+	import flash.events.ErrorEvent;
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
+	import flash.events.HTTPStatusEvent;
+	import flash.events.IOErrorEvent;
 	import flash.events.TimerEvent;
 	import flash.net.*;
 	import flash.utils.ByteArray;
@@ -110,8 +114,8 @@ package org.net.rpc
 			
 			requester.data=this.batchData;
 			this.responser.addEventListener(Event.COMPLETE,handleResponse);
-			//this.responser.addEventListener(IOErrorEvent.IO_ERROR,errorResponse);
-			//this.responser.addEventListener(HTTPStatusEvent.HTTP_STATUS,httpStatusHandle);
+			this.responser.addEventListener(IOErrorEvent.IO_ERROR,errorResponse);
+			this.responser.addEventListener(HTTPStatusEvent.HTTP_STATUS,httpStatusHandle);
 			this.responser.load(requester);		
 			timeOuter.reset();
 			timeOuter.start();
@@ -221,5 +225,28 @@ package org.net.rpc
 			if(errorHandle!=null)errorHandle.apply(null,[err]);
 			if(defaultErrorHandle!=null)defaultErrorHandle.apply(null,[err]);
 		}		
+		
+		public function errorResponse(e:ErrorEvent):void
+		{
+			var reqs:String="";
+			for(var i:int=0;i<this.requests.length;i++)
+			{
+				var ro:RpcRequestObject=this.requests[i];
+				reqs+=ro.toString()+"\n";
+			}
+			//errorAction(new KRPCError(0,KRPCError.TIME_OUT+"\n"+reqs))
+			
+			if(retryPass++>RetryTimes){
+				errorAction(new RpcError(-1,RpcError.TIME_OUT+"\n"+reqs))
+			}else{
+				this.responser.load(this.requester);	
+			}
+		}
+		
+		
+		private function httpStatusHandle(e:HTTPStatusEvent):void
+		{
+			trace(e);
+		}
 	}
 }

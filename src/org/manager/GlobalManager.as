@@ -18,11 +18,6 @@ package org.manager
 		 *主UI容器
 		 */		
 		public  const  uiContainer:Sprite=new Sprite()
-		/**
-		 *主人id 
-		 */		
-		public var userId:String
-			
 		
 			
 		/**
