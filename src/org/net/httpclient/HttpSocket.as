@@ -1,12 +1,17 @@
 package org.net.httpclient
 {	
 	import com.adobe.net.URI;
-	import org.net.httpclient.events.HttpRequestEvent;
 	
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.net.Socket;
+	import flash.utils.ByteArray;
 	
+	import flashx.textLayout.events.DamageEvent;
+	
+	import org.net.data.DataFormat;
+	import org.net.data.DataPackager;
+	import org.net.httpclient.events.HttpRequestEvent;
 	
 	// Socket
 	private var _socket:Socket; 
@@ -39,7 +44,7 @@ package org.net.httpclient
 				
 				_dispatcher.dispatchEvent(new HttpRequestEvent(request, null, HttpRequestEvent.CONNECT));
 				
-				sendRequest(uri, request);
+				sendRequest(request);
 			};
 			
 			// Connect
@@ -76,13 +81,41 @@ package org.net.httpclient
 		 * Create the socket.
 		 */
 		protected function createSocket():void {
-			else _socket = new Socket();
+			_socket = new Socket();
 			
 //			_socket.addEventListener(Event.CONNECT, onConnect);
 //			_socket.addEventListener(Event.CLOSE, onClose);
 //			_socket.addEventListener(IOErrorEvent.IO_ERROR, onIOError);
 //			_socket.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onSecurityError);
 //			_socket.addEventListener(ProgressEvent.SOCKET_DATA, onSocketData);
+		}
+		
+		
+		/**
+		 * Send request.
+		 * @param uri URI
+		 * @param request Request to write
+		 */
+		protected function sendRequest(request:HttpRequest):void {
+			var headerBytes:ByteArray = request.getHeader();
+			headerBytes.position = 0;
+			
+			headerBytes.compress();
+			_socket.writeBytes(headerBytes);
+			_socket.flush();
+			
+			//request body
+			for each (var reqObj:HttpRequestObject in request.body){
+				var data:ByteArray = new ByteArray();
+				var pack:DataPackager =new DataPackager(data);
+				
+				pack.writeUTFString(reqObj.funcName);
+				pack.writeArray(reqObj.vars);
+				
+				_socket.writeBytes(data);
+				_socket.flush();
+			}
+			headerBytes.position = 0;
 		}
 		
 	}
