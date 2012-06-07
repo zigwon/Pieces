@@ -6,7 +6,7 @@ package org.net.httpclient
 		private var _vars:Array;
 		
 		
-		public function RpcRequestObject(func:String,vars:Array,callbacks:Array,errorHandles:Array=null)
+		public function HttpRequestObject(func:String,vars:Array)
 		{
 			this._funcName=func
 			this._vars=vars;

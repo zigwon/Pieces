@@ -13,9 +13,6 @@ package org.net.httpclient
 	import org.net.data.DataPackager;
 	import org.net.httpclient.events.HttpRequestEvent;
 	
-	// Socket
-	private var _socket:Socket; 
-	
 	public class HttpSocket
 	{
 		public static const DEFAULT_HTTP_PORT:uint = 80; 
@@ -23,6 +20,9 @@ package org.net.httpclient
 		
 		// Event dispatcher
 		private var _dispatcher:EventDispatcher;
+		
+		// Socket
+		private var _socket:Socket; 
 		
 		
 		
@@ -42,9 +42,9 @@ package org.net.httpclient
 			//onConnect callback function, 
 			var onConnect:Function = function(event:Event):void {
 				
-				_dispatcher.dispatchEvent(new HttpRequestEvent(request, null, HttpRequestEvent.CONNECT));
+				//_dispatcher.dispatchEvent(new HttpRequestEvent(request, null, HttpRequestEvent.CONNECT));
 				
-				sendRequest(request);
+				sendRequest(uri, request);
 			};
 			
 			// Connect
@@ -73,6 +73,7 @@ package org.net.httpclient
 			
 			var host:String = uri.authority;
 			//Log.debug("Connecting: host: " + host + ", port: " + port);
+			_socket.addEventListener(Event.CONNECT, onConnect);
 			_socket.connect(host, port);
 		}
 		
@@ -96,13 +97,17 @@ package org.net.httpclient
 		 * @param uri URI
 		 * @param request Request to write
 		 */
-		protected function sendRequest(request:HttpRequest):void {
-			var headerBytes:ByteArray = request.getHeader();
-			headerBytes.position = 0;
-			
-			headerBytes.compress();
-			_socket.writeBytes(headerBytes);
+		protected function sendRequest(uri:URI, request:HttpRequest):void {
+			var httpBytes:ByteArray = request.getHeader(uri);
+			trace("Header:\n" + httpBytes.readUTFBytes(httpBytes.length));
+			httpBytes.position = 0;
+			_socket.writeBytes(httpBytes);
 			_socket.flush();
+			/*
+			var headerBytes:ByteArray = request.getHeader();
+			//headerBytes.position = 0;
+			//headerBytes.compress();
+			_socket.writeBytes(headerBytes);
 			
 			//request body
 			for each (var reqObj:HttpRequestObject in request.body){
@@ -116,6 +121,7 @@ package org.net.httpclient
 				_socket.flush();
 			}
 			headerBytes.position = 0;
+			*/
 		}
 		
 	}
